@@ -136,9 +136,6 @@ sh $BUILD_DIR/.profile.d/000_apt.sh
 #apt-get $APT_OPTIONS -y --force-yes -d install -y --install-recommends wine:i386 | indent
 ###########
 
-
-
-
 export PATH="$HOME/.apt/usr/bin:$PATH"
 export LD_LIBRARY_PATH="$HOME/.apt/usr/lib/x86_64-linux-gnu:$BUILD_DIR/.apt/usr/lib/i386-linux-gnu:$BUILD_DIR/.apt/usr/lib:$LD_LIBRARY_PATH"
 export LIBRARY_PATH="$HOME/.apt/usr/lib/x86_64-linux-gnu:$BUILD_DIR/.apt/usr/lib/i386-linux-gnu:$BUILD_DIR/.apt/usr/lib:$LIBRARY_PATH"
@@ -152,7 +149,7 @@ export | grep -E -e ' (PATH|LD_LIBRARY_PATH|LIBRARY_PATH|INCLUDE_PATH|CPATH|CPPP
 
 
 topic "debug..."
-ls -a "$HOME/.apt"
+#ls -a "$HOME/.apt"
 
 topic "debug..."
 echo $PATH
