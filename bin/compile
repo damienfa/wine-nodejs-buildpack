@@ -103,6 +103,8 @@ ls -a "$APT_CACHE_DIR"
 topic "debug 2"
 ls -a "$APT_STATE_DIR/lists"
 
+topic "debug 3"
+whereis add-apt-repository
 
 topic "add-apt-repository stuff ..."
 /usr/bin/python3 $BIN_DIR/add-apt-repository -y ppa:wine/wine-builds
