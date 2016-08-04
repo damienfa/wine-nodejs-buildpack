@@ -158,6 +158,10 @@ export | grep -E -e ' (PATH|LD_LIBRARY_PATH|LIBRARY_PATH|INCLUDE_PATH|CPATH|CPPP
 
 #topic "WINE"
 #apt-get $APT_OPTIONS -y --force-yes -d install -y --install-recommends wine:i386 | indent
+wget http://www.damienf.info/test/wine-git.tar.gz
+tar -zxvf ./wine-git.tar.gz wine-git
+cd wine-git
+ls -all wine-git
 
 topic "should configure..."
 #./configure 
