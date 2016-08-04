@@ -63,7 +63,7 @@ for PACKAGE in "${PACKAGES_LIST[@]}"; do
   fi
 done
 
-apt-get $APT_OPTIONS --force-yes --install-recommends wine | indent
+apt-get -y --install-recommends $APT_OPTIONS wine | indent
 
 mkdir -p $BUILD_DIR/.apt
 
