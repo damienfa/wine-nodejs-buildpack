@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir>
 PACKAGES_LIST=(
-   "software-properties-common"
+   "software-properties-common:i386"
 )
 
 # fail fast
@@ -55,8 +55,8 @@ apt-get $APT_OPTIONS update | indent
 
 
 #### DPKG
-topic "DPKG i386..."
-dpkg --add-architecture i386 $BUILD_DIR/.dpkg/
+#topic "DPKG i386..."
+#dpkg --add-architecture i386 $BUILD_DIR/.dpkg/
 
 #for DEB in $(ls -1 $DPKG_CACHE_DIR/*.deb); do
 #  topic "Installing $(basename $DEB)"
@@ -99,7 +99,7 @@ topic "add-apt-repository stuff ..."
 add-apt-repository -y ppa:wine/wine-builds
 
 topic "Install wine ... "
-apt-get $APT_OPTIONS -y --force-yes -d install -y --install-recommends wine | indent
+apt-get $APT_OPTIONS -y --force-yes -d install -y --install-recommends wine:i386 | indent
 
 
 #### APT
