@@ -164,7 +164,7 @@ cd wine-git
 #ls -all wine-git
 
 topic "should configure..."
-#./configure 
+./configure 
 #make
 #make install
 
