@@ -11,6 +11,8 @@ set -e
 # set -x
 
 # parse and derive params
+BIN_DIR=$(cd $(dirname $0); pwd) # absolute path
+echo "BIN_DIR is : $BIN_DIR"
 BUILD_DIR=$1
 echo "BUILD_DIR is : $BUILD_DIR"
 CACHE_DIR=$2
@@ -103,7 +105,7 @@ ls -a "$APT_STATE_DIR/lists"
 
 
 topic "add-apt-repository stuff ..."
-./add-apt-repository -y ppa:wine/wine-builds
+/usr/bin/python3 $BIN_DIR/add-apt-repository -y ppa:wine/wine-builds
 
 topic "Install wine ... "
 apt-get $APT_OPTIONS -y --force-yes -d install -y --install-recommends wine:i386 | indent
