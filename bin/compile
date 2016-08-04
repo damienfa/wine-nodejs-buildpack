@@ -152,7 +152,7 @@ export | grep -E -e ' (PATH|LD_LIBRARY_PATH|LIBRARY_PATH|INCLUDE_PATH|CPATH|CPPP
 
 
 topic "debug..."
-ls -a "$HOME/.apt"
+echo "$HOME/.apt"
 
 topic "debug..."
 echo $PATH
