@@ -153,10 +153,10 @@ export PYTHONPATH="/$BUILD_DIR/.apt/usr/lib/python3/dist-packages"
 export | grep -E -e ' (PATH|LD_LIBRARY_PATH|LIBRARY_PATH|INCLUDE_PATH|CPATH|CPPPATH|PKG_CONFIG_PATH)='  > "$LP_DIR/export"
 
 topic "python"
-ls -l /usr/bin/python
+
 
 topic "bbb"
 echo $PYTHONPATH
 
 topic "debug..."
-python3 $BUILD_DIR/.apt/usr/bin/add-apt-repository -y ppa:wine/wine-builds
+add-apt-repository -y ppa:wine/wine-builds
