@@ -56,7 +56,7 @@ apt-get $APT_OPTIONS update | indent
 
 #### DPKG
 topic "DPKG i386..."
-dpkg -x --add-architecture i386 $BUILD_DIR/.dpkg/
+dpkg --add-architecture i386 $BUILD_DIR/.dpkg/
 
 #for DEB in $(ls -1 $DPKG_CACHE_DIR/*.deb); do
 #  topic "Installing $(basename $DEB)"
