@@ -42,7 +42,7 @@ APT_STATE_DIR="$CACHE_DIR/apt/state"
 
 
 #mkdir -p $DPKG_CACHE_DIR
-mkdir -p $BUILD_DIR/.profile.d
+mkdir -p "$BUILD_DIR/.profile.d"
 mkdir -p "$APT_CACHE_DIR/archives/partial"
 mkdir -p "$APT_STATE_DIR/lists/partial"
 mkdir -p $DPKG_CACHE_DIR
@@ -57,6 +57,7 @@ apt-get $APT_OPTIONS update | indent
 
 
 #### DPKG
+topic "DPKG i386..."
 dpkg -x --add-architecture i386 $BUILD_DIR/.dpkg/
 
 #for DEB in $(ls -1 $DPKG_CACHE_DIR/*.deb); do
@@ -65,7 +66,7 @@ dpkg -x --add-architecture i386 $BUILD_DIR/.dpkg/
 #done
 
 topic "Writing dpkg profile script"
-mkdir -p $BUILD_DIR/.profile.d
+mkdir -p "$BUILD_DIR/.profile.d"
 cat <<EOF >$BUILD_DIR/.profile.d/000_dpkg.sh
 export PATH="\$HOME/.dpkg/usr/bin:$PATH"
 export LD_LIBRARY_PATH="\$HOME/.dpkg/usr/lib:\$LD_LIBRARY_PATH"
