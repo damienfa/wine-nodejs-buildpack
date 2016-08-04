@@ -159,9 +159,9 @@ export | grep -E -e ' (PATH|LD_LIBRARY_PATH|LIBRARY_PATH|INCLUDE_PATH|CPATH|CPPP
 #topic "WINE"
 #apt-get $APT_OPTIONS -y --force-yes -d install -y --install-recommends wine:i386 | indent
 
-topic "configure..."
-./configure 
-make
-make install
+topic "should configure..."
+#./configure 
+#make
+#make install
 
 #add-apt-repository -y ppa:wine/wine-builds
