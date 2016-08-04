@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir>
 PACKAGES_LIST=(
+   "gcc-multilib g++-multilib"
    "software-properties-common"
    "build-essential"
-   "gcc-multilib g++-multilib"
    "lib32z1 lib32ncurses5 lib32bz2-1.0"
    "libgl1-mesa-dri:i386"
    "libx11-dev:i386"
@@ -164,7 +164,7 @@ cd wine-git
 #ls -all wine-git
 
 topic "should configure..."
-./configure 
+./configure --host=i386-linux-gnu "CFLAGS=-m32" "CXXFLAGS=-m32" "LDFLAGS=-m32"
 #make
 #make install
 
