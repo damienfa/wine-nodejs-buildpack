@@ -97,22 +97,6 @@ for PACKAGE in "${PACKAGES_LIST[@]}"; do
 done
 
 
-topic "debug..."
-ls -a "$APT_CACHE_DIR"
-
-topic "debug 2"
-ls -a "$APT_STATE_DIR/lists"
-
-topic "debug 3"
-whereis add-apt-repository
-
-topic "add-apt-repository stuff ..."
-/usr/bin/python3 $BIN_DIR/add-apt-repository -y ppa:wine/wine-builds
-
-topic "Install wine ... "
-apt-get $APT_OPTIONS -y --force-yes -d install -y --install-recommends wine:i386 | indent
-
-
 #### APT
 
 mkdir -p $BUILD_DIR/.apt
@@ -133,6 +117,30 @@ export CPATH="\$INCLUDE_PATH"
 export CPPPATH="\$INCLUDE_PATH"
 export PKG_CONFIG_PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu/pkgconfig:\$HOME/.apt/usr/lib/i386-linux-gnu/pkgconfig:\$HOME/.apt/usr/lib/pkgconfig:\$PKG_CONFIG_PATH"
 EOF
+
+sh $BUILD_DIR/.profile.d/000_apt.sh
+
+#########
+topic "debug..."
+ls -a "$HOME/.apt"
+
+exit;
+
+topic "debug 2"
+ls -a "$APT_STATE_DIR/lists"
+
+topic "debug 3"
+whereis add-apt-repository
+
+topic "add-apt-repository stuff ..."
+/usr/bin/python3 $BIN_DIR/add-apt-repository -y ppa:wine/wine-builds
+
+topic "Install wine ... "
+apt-get $APT_OPTIONS -y --force-yes -d install -y --install-recommends wine:i386 | indent
+###########
+
+
+
 
 export PATH="$BUILD_DIR/.apt/usr/bin:$PATH"
 export LD_LIBRARY_PATH="$BUILD_DIR/.apt/usr/lib/x86_64-linux-gnu:$BUILD_DIR/.apt/usr/lib/i386-linux-gnu:$BUILD_DIR/.apt/usr/lib:$LD_LIBRARY_PATH"
