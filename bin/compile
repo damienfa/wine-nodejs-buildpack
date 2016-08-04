@@ -95,8 +95,14 @@ for PACKAGE in "${PACKAGES_LIST[@]}"; do
 done
 
 
+topic "debug..."
+ls -a $APT_CACHE_DIR
+
+topic "debug 2"
+ls -a $APT_STATE_DIR
+
 topic "add-apt-repository stuff ..."
-add-apt-repository -y ppa:wine/wine-builds
+sudo add-apt-repository -y ppa:wine/wine-builds
 
 topic "Install wine ... "
 apt-get $APT_OPTIONS -y --force-yes -d install -y --install-recommends wine:i386 | indent
