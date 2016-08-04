@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir>
 PACKAGES_LIST=(
-   "software-properties-common:i386"
+   "software-properties-common"
 )
 
 # fail fast
