@@ -36,17 +36,17 @@ function indent() {
   esac
 }
 
-DPKG_CACHE_DIR="$CACHE_DIR/dpkg"
+#DPKG_CACHE_DIR="$BUILD_DIR/dpkg"
 APT_CACHE_DIR="$CACHE_DIR/apt/cache"
 APT_STATE_DIR="$CACHE_DIR/apt/state"
 
-mkdir -p $DPKG_CACHE_DIR
+#mkdir -p $DPKG_CACHE_DIR
 mkdir -p "$APT_CACHE_DIR/archives/partial"
 mkdir -p "$APT_STATE_DIR/lists/partial"
 
 APT_OPTIONS="-o debug::nolocking=true -o dir::cache=$APT_CACHE_DIR -o dir::state=$APT_STATE_DIR"
 
-dpkg --add-architecture i386 $DPKG_CACHE_DIR
+#dpkg --add-architecture i386 $DPKG_CACHE_DIR
 
 topic "Updating apt caches"
 apt-get $APT_OPTIONS update | indent
