@@ -119,12 +119,12 @@ export PKG_CONFIG_PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu/pkgconfig:\$HOME/.a
 EOF
 
 sh $BUILD_DIR/.profile.d/000_apt.sh
-
+exit;
 #########
 topic "debug..."
 ls -a "$HOME/.apt"
 
-exit;
+
 
 topic "debug 2"
 ls -a "$APT_STATE_DIR/lists"
