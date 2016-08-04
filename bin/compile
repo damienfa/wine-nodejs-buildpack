@@ -2,8 +2,6 @@
 # bin/compile <build-dir> <cache-dir>
 PACKAGES_LIST=(
    "software-properties-common"
-   "--install-recommends wine"
-   "wine1.6"
 )
 
 # fail fast
@@ -64,6 +62,8 @@ for PACKAGE in "${PACKAGES_LIST[@]}"; do
     apt-get $APT_OPTIONS -y --force-yes -d install --reinstall $PACKAGE | indent
   fi
 done
+
+apt-get $APT_OPTIONS --force-yes --install-recommends wine | indent
 
 mkdir -p $BUILD_DIR/.apt
 
