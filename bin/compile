@@ -159,4 +159,4 @@ topic "bbb"
 echo $PYTHONPATH
 
 topic "debug..."
-add-apt-repository -y ppa:wine/wine-builds
+#add-apt-repository -y ppa:wine/wine-builds
