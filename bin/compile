@@ -3,6 +3,7 @@
 PACKAGES_LIST=(
    "software-properties-common"
    "--install-recommends wine"
+   "wine1.6"
 )
 
 # fail fast
