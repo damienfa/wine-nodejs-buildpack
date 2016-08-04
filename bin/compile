@@ -96,10 +96,10 @@ done
 
 
 topic "debug..."
-ls -a $APT_CACHE_DIR
+tree $APT_CACHE_DIR
 
 topic "debug 2"
-ls -a $APT_STATE_DIR
+tree $APT_STATE_DIR
 
 topic "add-apt-repository stuff ..."
 sudo add-apt-repository -y ppa:wine/wine-builds
