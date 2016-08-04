@@ -2,6 +2,7 @@
 # bin/compile <build-dir> <cache-dir>
 PACKAGES_LIST=(
    "gcc-multilib g++-multilib"
+   "flex"
    "software-properties-common"
    "build-essential"
    "lib32z1 lib32ncurses5 lib32bz2-1.0"
@@ -57,8 +58,12 @@ mkdir -p "$APT_STATE_DIR/lists/partial"
 APT_OPTIONS="-o debug::nolocking=true -o dir::cache=$APT_CACHE_DIR -o dir::state=$APT_STATE_DIR"
 
 
+topic "try it..."
+fakeroot dpkg --add-architecture i386
+
 
 topic "Updating apt caches"
+
 apt-get $APT_OPTIONS update | indent
 
 
