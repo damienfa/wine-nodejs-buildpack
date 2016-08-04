@@ -2,6 +2,12 @@
 # bin/compile <build-dir> <cache-dir>
 PACKAGES_LIST=(
    "software-properties-common"
+   "build-essential"
+   "gcc-multilib g++-multilib"
+   "lib32z1 lib32ncurses5 lib32bz2-1.0"
+   "libgl1-mesa-dri:i386"
+   "libx11-dev:i386"
+   "libfreetype6-dev:i386"
 )
 
 # fail fast
@@ -65,21 +71,20 @@ apt-get $APT_OPTIONS update | indent
 #  dpkg -x $DEB $BUILD_DIR/.dpkg/
 #done
 
-topic "Writing dpkg profile script"
-mkdir -p "$BUILD_DIR/.profile.d"
-cat <<EOF >$BUILD_DIR/.profile.d/000_dpkg.sh
-export PATH="\$HOME/.dpkg/usr/bin:$PATH"
-export LD_LIBRARY_PATH="\$HOME/.dpkg/usr/lib:\$LD_LIBRARY_PATH"
-export LD_LIBRARY_PATH="\$HOME/.dpkg/usr/lib/x86_64-linux-gnu:\$LD_LIBRARY_PATH"
-export LD_LIBRARY_PATH="\$HOME/.dpkg/lib:\$LD_LIBRARY_PATH"
-export LD_LIBRARY_PATH="\$HOME/.dpkg/lib/x86_64-linux-gnu:\$LD_LIBRARY_PATH"
-export LD_LIBRARY_PATH="\$HOME/.dpkg/lib64:\$LD_LIBRARY_PATH"
-export INCLUDE_PATH="\$HOME/.dpkg/usr/include:\$INCLUDE_PATH"
-export CPATH="\$INCLUDE_PATH"
-export CPPPATH="\$INCLUDE_PATH"
-EOF
-sh $BUILD_DIR/.profile.d/000_dpkg.sh
-
+#topic "Writing dpkg profile script"
+#mkdir -p "$BUILD_DIR/.profile.d"
+#cat <<EOF >$BUILD_DIR/.profile.d/000_dpkg.sh
+#export PATH="\$HOME/.dpkg/usr/bin:$PATH"
+#export LD_LIBRARY_PATH="\$HOME/.dpkg/usr/lib:\$LD_LIBRARY_PATH"
+#export LD_LIBRARY_PATH="\$HOME/.dpkg/usr/lib/x86_64-linux-gnu:\$LD_LIBRARY_PATH"
+#export LD_LIBRARY_PATH="\$HOME/.dpkg/lib:\$LD_LIBRARY_PATH"
+#export LD_LIBRARY_PATH="\$HOME/.dpkg/lib/x86_64-linux-gnu:\$LD_LIBRARY_PATH"
+#export LD_LIBRARY_PATH="\$HOME/.dpkg/lib64:\$LD_LIBRARY_PATH"
+#export INCLUDE_PATH="\$HOME/.dpkg/usr/include:\$INCLUDE_PATH"
+#export CPATH="\$INCLUDE_PATH"
+#export CPPPATH="\$INCLUDE_PATH"
+#EOF
+#sh $BUILD_DIR/.profile.d/000_dpkg.sh
 
 
 
@@ -134,7 +139,6 @@ source $BUILD_DIR/.profile.d/000_apt.sh
 #/usr/bin/python3 $BIN_DIR/add-apt-repository -y ppa:wine/wine-builds
 
 #topic "Install wine ... "
-#apt-get $APT_OPTIONS -y --force-yes -d install -y --install-recommends wine:i386 | indent
 ###########
 
 
@@ -152,11 +156,12 @@ export PYTHONPATH="/$BUILD_DIR/.apt/usr/lib/python3/dist-packages"
 #give environment to later buildpacks
 export | grep -E -e ' (PATH|LD_LIBRARY_PATH|LIBRARY_PATH|INCLUDE_PATH|CPATH|CPPPATH|PKG_CONFIG_PATH)='  > "$LP_DIR/export"
 
-topic "python"
+#topic "WINE"
+#apt-get $APT_OPTIONS -y --force-yes -d install -y --install-recommends wine:i386 | indent
 
+topic "configure..."
+./configure 
+make
+make install
 
-topic "bbb"
-echo $PYTHONPATH
-
-topic "debug..."
 #add-apt-repository -y ppa:wine/wine-builds
