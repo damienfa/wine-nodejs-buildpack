@@ -178,6 +178,8 @@ for DEB in $(ls -1 *.deb); do
   dpkg -x $DEB $BUILD_DIR/.apt/
 done;
 
+rm -r "$BUILD_DIR/.apt/package-wine"
+
 
 
 
