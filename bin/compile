@@ -15,7 +15,10 @@ PACKAGES_LIST=(
 set -e
 
 # debug
-# set -x
+set -x
+
+BIN_DIR=$(cd $(dirname $0); pwd) # absolute path
+ROOT_DIR=$(dirname $BIN_DIR)
 
 # parse and derive params
 BIN_DIR=$(cd $(dirname $0); pwd) # absolute path
@@ -27,7 +30,7 @@ echo "CACHE_DIR is : $CACHE_DIR"
 LP_DIR=`cd $(dirname $0); cd ..; pwd`
 
 echo "ATTENTION........"
-export PATH=$PATH:$BUILD_DIR/vendor/bpwatch
+export PATH=$PATH:$ROOT_DIR/vendor/bpwatch
 LOGPLEX_KEY="t.00000000-ad75-4643-8b9e-ebb288acc624"
 bpwatch init $LOGPLEX_KEY
 
