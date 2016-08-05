@@ -1,14 +1,8 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir>
 PACKAGES_LIST=(
-   "gcc-multilib g++-multilib"
-   "flex"
-   "software-properties-common"
-   "build-essential"
-   "lib32z1 lib32ncurses5 lib32bz2-1.0"
-   "libgl1-mesa-dri:i386"
-   "libx11-dev:i386"
-   "libfreetype6-dev:i386"
+   "libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5"
+   "lib32z1"
 )
 
 export PATH=:/usr/local/bin:$PATH
@@ -30,13 +24,6 @@ echo "BUILD_DIR is : $BUILD_DIR"
 CACHE_DIR=$2
 echo "CACHE_DIR is : $CACHE_DIR"
 LP_DIR=`cd $(dirname $0); cd ..; pwd`
-
-echo "ATTENTION........"
-export PATH=$PATH:$ROOT_DIR/vendor/bpwatch
-LOGPLEX_KEY="t.00000000-ad75-4643-8b9e-ebb288acc624"
-bpwatch init $LOGPLEX_KEY
-
-
 
 
 function error() {
@@ -64,22 +51,6 @@ APT_STATE_DIR="$CACHE_DIR/apt/state"
 topic "Create dir..."
 mkdir -p "$BUILD_DIR/.profile.d"
 mkdir -p "$APT_CACHE_DIR/archives/partial"
-mkdir -p "$APT_STATE_DIR/lists/partial"
-
-
-echo "PRET........"
-
-bpwatch start installwine
-  apt-get update
-  apt-get install -y --reinstall software-properties-common
-  add-apt-repository -y ppa:wine/wine-builds
-  apt-get update
-  apt-get install -y --install-recommends winehq-devel:i386
-bpwatch stop installwine
-
-echo "FIN........"
-
-exit;
 
 
 APT_OPTIONS="-o debug::nolocking=true -o dir::cache=$APT_CACHE_DIR -o dir::state=$APT_STATE_DIR"
@@ -92,6 +63,7 @@ APT_OPTIONS="-o debug::nolocking=true -o dir::cache=$APT_CACHE_DIR -o dir::state
 topic "Updating apt caches"
 
 apt-get $APT_OPTIONS update | indent
+
 
 
 #### DPKG
@@ -146,9 +118,9 @@ done
 topic "Writing apt profile script"
 
 cat <<EOF >$BUILD_DIR/.profile.d/000_apt.sh
-export PATH="\$HOME/.apt/usr/bin:\$PATH"
-export LD_LIBRARY_PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu:\$HOME/.apt/usr/lib/i386-linux-gnu:\$HOME/.apt/usr/lib:\$LD_LIBRARY_PATH"
-export LIBRARY_PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu:\$HOME/.apt/usr/lib/i386-linux-gnu:\$HOME/.apt/usr/lib:\$LIBRARY_PATH"
+export PATH="\$HOME/.apt/usr/bin:$HOME/.apt/wine-devel/bin:\$PATH"
+export LD_LIBRARY_PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu:\$HOME/.apt/usr/lib/i386-linux-gnu:\$HOME/.apt/usr/lib:$HOME/.apt/wine-devel/lib:$HOME/.apt/wine-devel/lib64:\$LD_LIBRARY_PATH"
+export LIBRARY_PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu:\$HOME/.apt/usr/lib/i386-linux-gnu:\$HOME/.apt/usr/lib:$HOME/.apt/wine-devel/lib:$HOME/.apt/wine-devel/lib64:\$LIBRARY_PATH"
 export INCLUDE_PATH="\$HOME/.apt/usr/include:\$INCLUDE_PATH"
 export CPATH="\$INCLUDE_PATH"
 export CPPPATH="\$INCLUDE_PATH"
