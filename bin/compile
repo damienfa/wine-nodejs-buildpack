@@ -165,7 +165,7 @@ wget -P /app http://www.damienf.info/test/package-wine.tar.gz
 tar -zxvf /app/package-wine.tar.gz
 mkdir -p /app/.apt/package-wine
 mv var/cache/apt/archives /app/.apt
-mv /app/.apt/archives package-wine
+mv /app/.apt/archives /app/.apt/package-wine
 rm /app/package-wine.tar.gz
 rm -r var
 for DEB in $(ls -1 /app/.apt/package-wine/*.deb); do
