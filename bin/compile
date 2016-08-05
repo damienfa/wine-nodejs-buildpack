@@ -118,9 +118,9 @@ done
 topic "Writing apt profile script"
 
 cat <<EOF >$BUILD_DIR/.profile.d/000_apt.sh
-export PATH="\$HOME/.apt/usr/bin:\$HOME/.apt/wine-devel/bin:\$PATH"
-export LD_LIBRARY_PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu:\$HOME/.apt/usr/lib/i386-linux-gnu:\$HOME/.apt/usr/lib:\$HOME/.apt/wine-devel/lib:\$HOME/.apt/wine-devel/lib64:\$HOME/.apt/lib:\$LD_LIBRARY_PATH"
-export LIBRARY_PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu:\$HOME/.apt/usr/lib/i386-linux-gnu:\$HOME/.apt/usr/lib:\$HOME/.apt/wine-devel/lib:\$HOME/.apt/wine-devel/lib64:\$HOME/.apt/lib:\$LIBRARY_PATH"
+export PATH="\$HOME/.apt/usr/bin:\$PATH"
+export LD_LIBRARY_PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu:\$HOME/.apt/usr/lib/i386-linux-gnu:\$HOME/.apt/usr/lib:$HOME/.apt/lib:$HOME/.apt/libx32:$HOME/.apt/lib32:$HOME/.apt/lib64:\$LD_LIBRARY_PATH"
+export LIBRARY_PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu:\$HOME/.apt/usr/lib/i386-linux-gnu:$HOME/.apt/usr/lib:$HOME/.apt/lib:$HOME/.apt/libx32:$HOME/.apt/lib32:$HOME/.apt/lib64:\$LIBRARY_PATH"
 export INCLUDE_PATH="\$HOME/.apt/usr/include:\$HOME/.apt/usr/share:\$INCLUDE_PATH"
 export CPATH="\$INCLUDE_PATH"
 export CPPPATH="\$INCLUDE_PATH"
