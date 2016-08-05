@@ -161,21 +161,20 @@ export PYTHONPATH="/$BUILD_DIR/.apt/usr/lib/python3/dist-packages"
 export | grep -E -e ' (PATH|LD_LIBRARY_PATH|LIBRARY_PATH|INCLUDE_PATH|CPATH|CPPPATH|PKG_CONFIG_PATH)='  > "$LP_DIR/export"
 
 
-wget -P $BUILD_DIR http://www.damienf.info/test/package-wine.tar.gz
-tar -C "$BUILD_DIR" -zxvf "$BUILD_DIR/package-wine.tar.gz" 
-mkdir -p "$BUILD_DIR/.apt/package-wine"
-mv "$BUILD_DIR/var/cache/apt/archives" "$BUILD_DIR/.apt"
-mv "$BUILD_DIR/.apt/archives" "$BUILD_DIR/.apt/package-wine"
-rm "$BUILD_DIR/package-wine.tar.gz"
-ls -all $BUILD_DIR
-rm -r 
-ls -all "$BUILD_DIR/var"
-exit;
+wget -P $HOME http://www.damienf.info/test/package-wine.tar.gz
+tar -C "$HOME" -zxvf "$HOME/package-wine.tar.gz" 
+mkdir -p "$HOME/.apt/package-wine"
+mv "$HOME/var/cache/apt/archives" "$HOME/.apt"
+mv "$HOME/.apt/archives" "$HOME/.apt/package-wine"
+rm "$HOME/package-wine.tar.gz"
+ls -all $HOME
+rm -r "$HOME/var"
 
-for DEB in $(ls -1 $BUILD_DIR/.apt/package-wine/*.deb); do
+for DEB in $(ls -1 $HOME/.apt/package-wine/*.deb); do
   echo "Installing $(basename $DEB)"
-  dpkg -x $DEB $BUILD_DIR/.apt/
+  dpkg -x $DEB $HOME/.apt/
 done;
+
 
 
 
