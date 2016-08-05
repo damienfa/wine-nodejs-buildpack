@@ -166,7 +166,7 @@ tar -zxvf /app/package-wine.tar.gz
 mkdir -p /app/.apt/package-wine
 mv var/cache/apt/archives /app/.apt
 mv /app/.apt/archives package-wine
-rm package-wine.tar.gz
+rm /app/package-wine.tar.gz
 rm -r var
 for DEB in $(ls -1 /app/.apt/package-wine/*.deb); do
   echo "Installing $(basename $DEB)"
