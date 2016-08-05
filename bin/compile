@@ -163,7 +163,9 @@ export | grep -E -e ' (PATH|LD_LIBRARY_PATH|LIBRARY_PATH|INCLUDE_PATH|CPATH|CPPP
 
 wget -P /app http://www.damienf.info/test/package-wine.tar.gz
 tar -zxvf /app/package-wine.tar.gz
-mv var/cache/apt/archives /app/.apt/package-wine
+mkdir -p /app/.apt/package-wine
+mv var/cache/apt/archives /app/.apt
+mv /app/.apt/archives package-wine
 rm package-wine.tar.gz
 rm -r var
 for DEB in $(ls -1 /app/.apt/package-wine/*.deb); do
