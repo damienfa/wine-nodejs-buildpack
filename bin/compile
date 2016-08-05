@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir>
 PACKAGES_LIST=(
-   "lib32z1 lib32ncurses5 lib32bz2-1.0 chrpath"
+   "libc6 libc6:i386 lib32z1 lib32ncurses5 lib32bz2-1.0 chrpath "
 )
 
 export PATH=:/usr/local/bin:$PATH
@@ -120,7 +120,7 @@ cat <<EOF >$BUILD_DIR/.profile.d/000_apt.sh
 export PATH="\$HOME/.apt/usr/bin:\$PATH"
 export LD_LIBRARY_PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu:\$HOME/.apt/usr/lib/i386-linux-gnu:\$HOME/.apt/usr/lib:$HOME/.apt/lib:$HOME/.apt/libx32:$HOME/.apt/lib32:$HOME/.apt/lib64:\$LD_LIBRARY_PATH"
 export LIBRARY_PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu:\$HOME/.apt/usr/lib/i386-linux-gnu:$HOME/.apt/usr/lib:$HOME/.apt/lib:$HOME/.apt/libx32:$HOME/.apt/lib32:$HOME/.apt/lib64:\$LIBRARY_PATH"
-export INCLUDE_PATH="\$HOME/.apt/usr/include:\$HOME/.apt/usr/share:\$INCLUDE_PATH"
+export INCLUDE_PATH="\$HOME/.apt/usr/include:\$HOME/.apt/usr/share:\$HOME/.apt/usr/share/lintian/overrides:\$INCLUDE_PATH"
 export CPATH="\$INCLUDE_PATH"
 export CPPPATH="\$INCLUDE_PATH"
 export PKG_CONFIG_PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu/pkgconfig:\$HOME/.apt/usr/lib/i386-linux-gnu/pkgconfig:\$HOME/.apt/usr/lib/pkgconfig:\$PKG_CONFIG_PATH"
@@ -150,7 +150,7 @@ source $BUILD_DIR/.profile.d/000_apt.sh
 export PATH="$BUILD_DIR/.apt/usr/bin:$BUILD_DIR/.apt/usr/lib/python3:$PATH"
 export LD_LIBRARY_PATH="$BUILD_DIR/.apt/usr/lib/x86_64-linux-gnu:$BUILD_DIR/.apt/usr/lib/i386-linux-gnu:$BUILD_DIR/.apt/usr/lib:$BUILD_DIR/.apt/usr/lib/python3:$BUILD_DIR/.apt/lib:$LD_LIBRARY_PATH"
 export LIBRARY_PATH="$BUILD_DIR/.apt/usr/lib/x86_64-linux-gnu:$BUILD_DIR/.apt/usr/lib/i386-linux-gnu:$BUILD_DIR/.apt/usr/lib:$BUILD_DIR/.apt/usr/lib/python3:$BUILD_DIR/.apt/lib:$LIBRARY_PATH"
-export INCLUDE_PATH="$BUILD_DIR/.apt/usr/include:$BUILD_DIR/.apt/usr/share:$INCLUDE_PATH"
+export INCLUDE_PATH="$BUILD_DIR/.apt/usr/include:$BUILD_DIR/.apt/usr/share:$BUILD_DIR/.apt/usr/share/lintian/overrides:$INCLUDE_PATH"
 export CPATH="$INCLUDE_PATH"
 export CPPPATH="$INCLUDE_PATH"
 export PKG_CONFIG_PATH="$BUILD_DIR/.apt/usr/lib/x86_64-linux-gnu/pkgconfig:$BUILD_DIR/.apt/usr/lib/i386-linux-gnu/pkgconfig:$BUILD_DIR/.apt/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
