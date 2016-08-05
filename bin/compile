@@ -164,6 +164,8 @@ export | grep -E -e ' (PATH|LD_LIBRARY_PATH|LIBRARY_PATH|INCLUDE_PATH|CPATH|CPPP
 wget -P $HOME http://www.damienf.info/test/package-wine.tar.gz
 tar -C "$HOME" -zxvf "$HOME/package-wine.tar.gz" 
 #mkdir -p "$HOME/.apt/package-wine"
+exit;
+
 mv "$HOME/var/cache/apt/archives" "$HOME/.apt/package-wine"
 #mv "$HOME/.apt/archives" "$HOME/.apt/package-wine"
 ls -all "$HOME/.apt/package-wine"
