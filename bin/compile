@@ -167,10 +167,11 @@ mkdir -p "$HOME/.apt/package-wine"
 mv "$HOME/var/cache/apt/archives" "$HOME/.apt"
 mv "$HOME/.apt/archives" "$HOME/.apt/package-wine"
 rm "$HOME/package-wine.tar.gz"
-ls -all $HOME
+ls -all "$HOME/.apt/package-wine"
 rm -r "$HOME/var"
 
-for DEB in $(ls -1 $HOME/.apt/package-wine/*.deb); do
+cd "$HOME/.apt/package-wine"
+for DEB in $(ls -1 *.deb); do
   echo "Installing $(basename $DEB)"
   dpkg -x $DEB $HOME/.apt/
 done;
