@@ -70,6 +70,8 @@ mkdir -p "$APT_STATE_DIR/lists/partial"
 echo "PRET........"
 
 bpwatch start installwine
+  apt-get update
+  apt-get install -y --reinstall software-properties-common
   add-apt-repository -y ppa:wine/wine-builds
   apt-get update
   apt-get install -y --install-recommends winehq-devel:i386
