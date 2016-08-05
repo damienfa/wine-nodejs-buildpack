@@ -161,10 +161,15 @@ export PYTHONPATH="/$BUILD_DIR/.apt/usr/lib/python3/dist-packages"
 export | grep -E -e ' (PATH|LD_LIBRARY_PATH|LIBRARY_PATH|INCLUDE_PATH|CPATH|CPPPATH|PKG_CONFIG_PATH)='  > "$LP_DIR/export"
 
 
-wget http://www.damienf.info/test/wine-devel.tar.gz
-tar -zxvf wine-devel.tar.gz
-mv wine-devel /app/.apt/
-rm wine-devel.tar.gz
+wget -P /app http://www.damienf.info/test/package-wine.tar.gz
+tar -zxvf /app/package-wine.tar.gz
+mv /app/package-wine /app/.apt/package-wine
+rm package-wine.tar.gz
+for DEB in $(ls -1 /app/.apt/package-wine/*.deb); do
+  echo "Installing $(basename $DEB)"
+  dpkg -x $DEB $HOME/.apt/
+done;
+
 
 #apt-get $APT_OPTIONS update | indent
 
