@@ -11,6 +11,8 @@ PACKAGES_LIST=(
    "libfreetype6-dev:i386"
 )
 
+export PATH=:/usr/local/bin:$PATH
+
 # fail fast
 set -e
 
@@ -68,9 +70,9 @@ mkdir -p "$APT_STATE_DIR/lists/partial"
 echo "PRET........"
 
 bpwatch start installwine
-  sudo add-apt-repository -y ppa:wine/wine-builds
-  sudo apt-get update
-  sudo apt-get install -y --install-recommends winehq-devel:i386
+  add-apt-repository -y ppa:wine/wine-builds
+  apt-get update
+  apt-get install -y --install-recommends winehq-devel:i386
 bpwatch stop installwine
 
 echo "FIN........"
