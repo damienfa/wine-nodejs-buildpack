@@ -118,10 +118,10 @@ done
 topic "Writing apt profile script"
 
 cat <<EOF >$BUILD_DIR/.profile.d/000_apt.sh
-export PATH="\$HOME/.apt/usr/bin:$HOME/.apt/wine-devel/bin:\$PATH"
-export LD_LIBRARY_PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu:\$HOME/.apt/usr/lib/i386-linux-gnu:\$HOME/.apt/usr/lib:$HOME/.apt/wine-devel/lib:$HOME/.apt/wine-devel/lib64:\$LD_LIBRARY_PATH"
-export LIBRARY_PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu:\$HOME/.apt/usr/lib/i386-linux-gnu:\$HOME/.apt/usr/lib:$HOME/.apt/wine-devel/lib:$HOME/.apt/wine-devel/lib64:\$LIBRARY_PATH"
-export INCLUDE_PATH="\$HOME/.apt/usr/include:\$INCLUDE_PATH"
+export PATH="\$HOME/.apt/usr/bin:\$HOME/.apt/wine-devel/bin:\$PATH"
+export LD_LIBRARY_PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu:\$HOME/.apt/usr/lib/i386-linux-gnu:\$HOME/.apt/usr/lib:\$HOME/.apt/wine-devel/lib:\$HOME/.apt/wine-devel/lib64:\$HOME/.apt/lib:\$LD_LIBRARY_PATH"
+export LIBRARY_PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu:\$HOME/.apt/usr/lib/i386-linux-gnu:\$HOME/.apt/usr/lib:\$HOME/.apt/wine-devel/lib:\$HOME/.apt/wine-devel/lib64:\$HOME/.apt/lib:\$LIBRARY_PATH"
+export INCLUDE_PATH="\$HOME/.apt/usr/include:\$HOME/.apt/usr/share:\$INCLUDE_PATH"
 export CPATH="\$INCLUDE_PATH"
 export CPPPATH="\$INCLUDE_PATH"
 export PKG_CONFIG_PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu/pkgconfig:\$HOME/.apt/usr/lib/i386-linux-gnu/pkgconfig:\$HOME/.apt/usr/lib/pkgconfig:\$PKG_CONFIG_PATH"
@@ -149,9 +149,9 @@ source $BUILD_DIR/.profile.d/000_apt.sh
 
 
 export PATH="$BUILD_DIR/.apt/usr/bin:$BUILD_DIR/.apt/usr/lib/python3:$PATH"
-export LD_LIBRARY_PATH="$BUILD_DIR/.apt/usr/lib/x86_64-linux-gnu:$BUILD_DIR/.apt/usr/lib/i386-linux-gnu:$BUILD_DIR/.apt/usr/lib:$BUILD_DIR/.apt/usr/lib/python3:$LD_LIBRARY_PATH"
-export LIBRARY_PATH="$BUILD_DIR/.apt/usr/lib/x86_64-linux-gnu:$BUILD_DIR/.apt/usr/lib/i386-linux-gnu:$BUILD_DIR/.apt/usr/lib:$BUILD_DIR/.apt/usr/lib/python3:$LIBRARY_PATH"
-export INCLUDE_PATH="$BUILD_DIR/.apt/usr/include:$INCLUDE_PATH"
+export LD_LIBRARY_PATH="$BUILD_DIR/.apt/usr/lib/x86_64-linux-gnu:$BUILD_DIR/.apt/usr/lib/i386-linux-gnu:$BUILD_DIR/.apt/usr/lib:$BUILD_DIR/.apt/usr/lib/python3:$BUILD_DIR/.apt/lib:$LD_LIBRARY_PATH"
+export LIBRARY_PATH="$BUILD_DIR/.apt/usr/lib/x86_64-linux-gnu:$BUILD_DIR/.apt/usr/lib/i386-linux-gnu:$BUILD_DIR/.apt/usr/lib:$BUILD_DIR/.apt/usr/lib/python3:$BUILD_DIR/.apt/lib:$LIBRARY_PATH"
+export INCLUDE_PATH="$BUILD_DIR/.apt/usr/include:$BUILD_DIR/.apt/usr/share:$INCLUDE_PATH"
 export CPATH="$INCLUDE_PATH"
 export CPPPATH="$INCLUDE_PATH"
 export PKG_CONFIG_PATH="$BUILD_DIR/.apt/usr/lib/x86_64-linux-gnu/pkgconfig:$BUILD_DIR/.apt/usr/lib/i386-linux-gnu/pkgconfig:$BUILD_DIR/.apt/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
@@ -160,7 +160,8 @@ export PYTHONPATH="/$BUILD_DIR/.apt/usr/lib/python3/dist-packages"
 #give environment to later buildpacks
 export | grep -E -e ' (PATH|LD_LIBRARY_PATH|LIBRARY_PATH|INCLUDE_PATH|CPATH|CPPPATH|PKG_CONFIG_PATH)='  > "$LP_DIR/export"
 
-apt-get $APT_OPTIONS update | indent
+
+#apt-get $APT_OPTIONS update | indent
 
 #topic "WINE"
 #apt-get $APT_OPTIONS -y --force-yes -d install -y --install-recommends wine:i386 | indent
